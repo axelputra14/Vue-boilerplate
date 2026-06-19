@@ -5,23 +5,21 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/:pathMatch(.*)*",
-      name: "NotFound",
+      path: "/",
+      name: "homepage",
       component: HomeView,
     },
     {
-      path: "/",
-      name: "homepage",
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
       component: HomeView,
     },
   ],
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.name == "NotFound") {
-    next("/");
-  } else {
-    next();
+router.beforeEach((to) => {
+  if (to.name === "NotFound") {
+    return "/";
   }
 });
 
